@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Portal - Registeration{% endblock %}
+{% block header_files %}
+  <link rel="stylesheet" href="{% static 'login/css/bootstrap-social.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'login/images/favicon.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+    href="{% static 'login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'login/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'lcss/style1.css' %}">
+{% endblock %}
+
+{% block content %}
+<body>
+
+  <div class="limiter">
+ <div class="container-login100" style="background-image: url('{% static 'login/images/edited1.jpg' %}');">
+  <section id="register" class="bg-light wrap-login100" style="width:43vw; height:97vh;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header text-white " style="background-color: #720e9e;">
+              <h1>
+              <i class="fa fa-user-plus" style="padding-right:40px;"></i>SIGN UP</h1>
+            </div>
+            <div class="card-body" style="font-size:14px;">
+              <!-- alert message -->
+                {% include 'partials/_alerts.html' %}
+              <!-- End of alert -->
+                <form action="{% url 'register' %}" method="POST">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <label for="first_name" style="color: black;">First Name</label>
+                    <input type="text" name="first_name" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="last_name" style="color: black;">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" required>
+                    <div class="form-group">
+                  <div class="form-group" >
+                    <label for="username" style="color: black;">Matric Number</label>
+                    <input type="text" name="username" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="email" style="color: black;">Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password" style="color: black;">Password</label>
+                    <input type="password" name="password" class="form-control" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="password2" style="color: black;">Password</label>
+                    <input type="password" name="password2" class="form-control" required>
+                  </div>
+                    <!-- <br/> -->
+                  <label for="gender" style="color: black;">Gender</label>
+                  <select name="gender">
+                    <option value="male">MALE</option>
+                    <option value="female">FEMALE</option>
+                  </select>
+                </div>
+                </div>
+                  <input type="submit" value="Register" class="btn btn-block" style="background-color: #720e9e; color:white; font-size:20px;">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</body>
+
+<script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'login/vendor/animsition/js/animsition.min.js' %}"></script>
+<script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+<script src="{% static 'login/vendor/daterangepicker/moment.min.js' %}"></script>
+<script src="{% static 'login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+<script src="{% static 'login/vendor/countdowntime/countdowntime.js' %}"></script>
+<script src="{% static 'login/js/main.js' %}"></script>
+{% endblock %}

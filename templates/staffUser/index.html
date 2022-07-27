@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+    <div class="wrapper">
+        <div class="sidebar" data-color="red" data-image="{% static 'assets/img/iiita.jpeg' %}">
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <div class="simple-text">
+                        {{ request.user.get_full_name }} (Admin)
+                    </div>
+                </div>
+                <ul class="nav">
+                    <li>
+                        <a href="{% url 'homepage' %}">
+                            <i class="pe-7s-home"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a href="https://elearning.acuoyo.net/">
+                            <i class="pe-7s-study"></i>
+                            <p>ACU E-learning</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="https://www.acuoyo.net/">
+                            <i class="pe-7s-mail"></i>
+                            <p>STAFF MAIL</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="https://www.acu.edu.ng">
+                            <i class="pe-7s-culture"></i>
+                            <p>ACU WEBSITE</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="https://www.acuypp.net/">
+                            <i class="pe-7s-cash"></i>
+                            <p>ACU PAYMENT PORTAL</p>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="https://acu.edu.ng/index.php/acu-journals/">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>ACU JOURNALS</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                data-target="#navigation-example-2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Dashboard</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                                <form action="{% url 'logout' %}" method="POST" id="logout">
+                                  {% csrf_token %}
+                                  <input type="hidden">
+                                </form>
+                            </li>
+                            <li class="separator hidden-lg hidden-md"></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="content" style="background-image: url('{% static 'login/images/edited1.jpg' %}');height:91vh;">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="header" >
+                            <h4 class="title" style="text-align: center">Hostel and Room Requests</h4>
+                            <section class="search-sec">
+                                <div>
+                                    <form action="{% url 'search' %}">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="row">
+                                                      <div class="col-lg-3 col-md-3 col-sm-12 ">
+                                                        <label class="sr-only">Keywords</label>
+                                                        <select name='keywords' class="form-control">
+                                                            <option selected='true' disabled='disabled'>SELECT HOSTEL</option>
+                                                            {% for key,value in search_choices.items %}
+
+                                                            <option value="{{ key }}">{{ value }}</option>
+
+                                                            {% endfor %}
+                                                        
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-3 col-md-3 col-sm-12 " >
+                                                        
+                                                        <button type="submit" class="btn btn-primary wrn-btn" style="background-color:#42d0ed;color:white;border:#42d0ed;"">Filter</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="content">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>STUDENT</th>
+                                            <th>Hostel</th>
+                                            <th>Room Requested</th>
+                                            <th>Bedspace</th>
+                                            <th>Status</th>
+                                            <th>Date Of Booking</th>
+                                            
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% if visitor %}
+                                            {% for temp in visitor %}
+                                                <tr>
+                                                    <td>
+                                                        <a href="{% url 'user_request_edit_admin' temp.user.pk %}">{{ temp.user.username }}</a>
+                                                    </td>
+                                                    <td>{{ temp.hostel_name}}</td>
+                                                    <td>{{ temp.room_number }}</td>
+                                                    <td>{{ temp.room_preference }}</td>
+                                                    {% if temp.status %}
+                                                        <td style="color: green">Confirmed</td>
+                                                    {% else %}
+                                                        <td style="color:red">Not Confirmed</td>
+                                                    {% endif %}
+                                                    <td>{{ temp.date_of_booking }}</td>
+                                                    
+                                                </tr>
+
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td>None</td>
+                                                <td>None</td>
+                                                <td>None</td>
+                                                <td>None</td>
+                                                <td>None</td>
+
+                                            </tr>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        
+  <!-- pagination  -->
+  <div class="row" style="padding-left:15px">
+    <div class="col-md-3">
+      
+      {% if visitor.has_other_pages %}
+      <ul class="pagination">
+
+       {% if visitor.has_previous %}
+       <li class="page-item">
+            <a href="?page={{visitor.previous_page_number}}" class="page-link">&laquo;</a>
+       </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a  class="page-link">&laquo;</a>
+          </li> 
+          
+       {% endif %}
+       {% for i in visitor.paginator.page_range  %}
+         {% if visitor.number == i %}
+             <li class="page-item active">
+               <a  class="page-link">{{i}}</a>
+             </li>
+          {% else %}
+          <li class="page-item">
+            <a href="?page={{i}}" class="page-link">{{i}}</a>
+          </li>
+         {% endif %}
+       {% endfor %}
+       
+        {% if visitor.has_next %}
+        <li class="page-item">
+           <a href="?page={{visitor.next_page_number}}" class="page-link">&raquo;</a>
+        </li>
+         {% else %}
+          <li class="page-item disabled">
+              <a  class="page-link">&raquo;</a>
+          </li> 
+         {% endif %}
+    </ul>
+      {% endif %}
+    </div>
+</div>
+
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav class="pull-left">
+                            <ul>
+                                <li>
+                                    <a href="">
+                                        Developed By Rabiu Oluwaferanmi
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        </div>
+        </div>
+{% endblock %}

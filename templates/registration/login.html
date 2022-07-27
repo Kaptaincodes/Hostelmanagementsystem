@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Portal - Login{% endblock %}
+{% block header_files %}
+    <link rel="stylesheet" href="{% static 'login/css/bootstrap-social.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'login/images/favicon.png' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animate/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/css-hamburgers/hamburgers.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/animsition/css/animsition.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/select2/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/vendor/daterangepicker/daterangepicker.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'login/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'lcss/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('{% static 'login/images/edited1.jpg' %}');">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" method="POST">
+					<span class="login100-form-title">
+                        <!-- {% if error_msg %}
+                            <div class="alert alert-danger">{{ error_msg }}</div>
+                        {% endif %} -->
+                        ACU Hostel Portal
+					</span>
+                    <hr>
+                    <span class="login100-form-title p-b-48" style="padding-bottom: 5px;">
+                        <img src="{% static 'login/images/aculogo.png' %}" alt="logo" height="150px" width="150px">
+					</span>
+                    <hr>
+        <section>
+          <div class="container">
+                          <div class="row">
+                            <div class="col-md-12 mx-auto">
+                              <div class="card">
+                                <div class="card-body">
+                                   <!-- alert message -->
+                                     {% include 'partials/_alerts.html' %}
+                                   <!-- End of alert -->
+                                  <form action="{% url 'login' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                      <label for="username">Username</label>
+                                      <input type="text" name="username" class="form-control" required>
+                                    </div>
+                    
+                                    <div class="form-group">
+                                      <label for="password2">Password</label>
+                                      <input type="password" name="password" class="form-control" required>
+                                    </div>
+                    
+                                    <input type="submit" value="Login" class="btn btn-block btn-social btn-lg btn-yahoo btn-round btn-lg" style="background-color: #720e9e;">
+                                  </form>
+                                  <a href="{% url 'register' %}"
+                                  class="btn btn-block btn-social btn-lg btn-facebook btn-round btn-lg">
+                                   <span class="fa fa-user-plus" style="padding-top: 2px;"></span>Register</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+           </div>                 
+                <!--     login previous                <a href="{% url 'social:begin' 'google-oauth2' %}"
+                       class="btn btn-block btn-social btn-lg btn-yahoo btn-round btn-lg">
+                        <span class="fa fa-user" style="padding-top: 2px;"></span>Login with Google</a>
+                     <a href="{% url 'social:begin' 'google-oauth2' %}"
+                        class="btn btn-block btn-social btn-lg btn-google btn-round btn-lg">
+                         <span class="fa fa-google" style="padding-top: 2px;"></span>Login with Google</a> -->
+
+                </form>
+        </section>
+            </div>
+            <div class="col-md-12"><p align="center" style="color: white;">Developed By <a
+                    href="" style="color: white;" id="credits">Rabiu Oluwaferanmi</a></p>
+            </div>
+        </div>
+    </div>
+    <div id="dropDownSelect1"></div>
+
+    <script src="{% static 'login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'login/vendor/animsition/js/animsition.min.js' %}"></script>
+    <script src="{% static 'login/vendor/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'login/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'login/vendor/daterangepicker/moment.min.js' %}"></script>
+    <script src="{% static 'login/vendor/daterangepicker/daterangepicker.js' %}"></script>
+    <script src="{% static 'login/vendor/countdowntime/countdowntime.js' %}"></script>
+    <script src="{% static 'login/js/main.js' %}"></script>
+{% endblock %}
